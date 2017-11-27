@@ -22,4 +22,5 @@ Docs/api/*.yml
 .vs/*
 *.lock.*
 .DS_Store
+.vscode/
 
