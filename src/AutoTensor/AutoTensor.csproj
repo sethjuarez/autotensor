@@ -8,11 +8,14 @@
     <PackageVersion>0.1.0-alpha</PackageVersion>
     <Authors>Seth Juarez</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://github.com/sethjuarez/autotensor</PackageProjectUrl>
+    <PackageProjectUrl>http://autotensor.net</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/sethjuarez/autotensor/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageReleaseNotes>First release</PackageReleaseNotes>
     <Copyright>Copyright 2017 (c) Seth Juarez. All rights reserved.</Copyright>
     <PackageTags>tensor machine-learning</PackageTags>
+    <RepositoryUrl>https://github.com/sethjuarez/autotensor</RepositoryUrl>
+    <NeutralLanguage />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   
   <ItemGroup>
