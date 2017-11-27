@@ -2,8 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>AutoTensor</PackageId>
+    <Title>AutoTensor</Title>
+    <Description>Automatic tensor conversion for .NET</Description>
+    <PackageVersion>0.1.0-alpha</PackageVersion>
+    <Authors>Seth Juarez</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/sethjuarez/autotensor</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/sethjuarez/autotensor/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <Copyright>Copyright 2017 (c) Seth Juarez. All rights reserved.</Copyright>
+    <PackageTags>tensor machine-learning</PackageTags>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="System.Numerics.Tensors" Version="0.1.0-e171125-2" />
   </ItemGroup>
