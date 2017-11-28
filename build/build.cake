@@ -119,7 +119,7 @@ Task("Docs")
     // write out version in prep for doc gen
     var f = "../docs/version.json";
 
-    if(suffix.Length > 0)
+    if(!stable)
         UpdateProjectJsonVersion(release + "-e" + suffix, f, "_appId");
     else
         UpdateProjectJsonVersion(release, f, "_appId");
