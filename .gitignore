@@ -23,4 +23,5 @@ Docs/api/*.yml
 *.lock.*
 .DS_Store
 .vscode/
-
+build/output
+build/tools
