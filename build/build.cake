@@ -13,6 +13,7 @@ var target = Argument("target", "Default");
 var output = Argument("output", "./output");
 var configuration = Argument("configuration", "Release");
 var suffix = Argument("suffix", DateTime.Now.ToString("yyMMdd-ss"));
+var stable = false;
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -64,12 +65,18 @@ Task("Version")
     .Does(() =>
 {
     // update csproj build
-    var version = release + "-" + suffix;
+    var version = release + "-e" + suffix;
     Information("Updating AutoTensor project file");
     Information(" ====> " + version + " (" + copyright + ")");
     var f = File("../src/AutoTensor/AutoTensor.csproj");
     XmlPoke(f, "//PropertyGroup/VersionPrefix", release);
-    XmlPoke(f, "//PropertyGroup/VersionSuffix", "e" + suffix);
+
+    // add suffix if not stable
+    if(!stable)
+        XmlPoke(f, "//PropertyGroup/VersionSuffix", "e" + suffix);
+    else
+        XmlPoke(f, "//PropertyGroup/VersionSuffix", "");
+
     XmlPoke(f, "//PropertyGroup/Copyright", copyright);
 });
 
@@ -110,14 +117,17 @@ Task("Docs")
     .Does(() => 
 {
     // write out version in prep for doc gen
-    if(suffix.Length > 0)
-        UpdateProjectJsonVersion(release + "-" + suffix, "../docs/version.json", "_appId");
-    else
-        UpdateProjectJsonVersion(release, "../docs/version.json", "_appId");
+    var f = "../docs/version.json";
 
-    UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), "../docs/version.json", "_year");
-    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), "../docs/version.json", "_date");
-    UpdateProjectJsonVersion(suffix, "../docs/version.json", "_build");
+    if(suffix.Length > 0)
+        UpdateProjectJsonVersion(release + "-e" + suffix, f, "_appId");
+    else
+        UpdateProjectJsonVersion(release, f, "_appId");
+
+    
+    UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), f, "_year");
+    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), f, "_date");
+    UpdateProjectJsonVersion(suffix, f, "_build");
 
 
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
