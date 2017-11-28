@@ -5,7 +5,7 @@
     <PackageId>AutoTensor</PackageId>
     <Title>AutoTensor</Title>
     <Description>Automatic tensor conversion for .NET</Description>
-    <PackageVersion>0.1.0-alpha</PackageVersion>
+    <PackageVersion>VERSION</PackageVersion>
     <Authors>Seth Juarez</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>http://autotensor.net</PackageProjectUrl>
