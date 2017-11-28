@@ -8,11 +8,11 @@
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
 var release = "0.1.3";
-var suffix = "alpha";
 var copyright = string.Format("©{0}, Seth Juarez. All rights reserved.", DateTime.Now.Year);
 var target = Argument("target", "Default");
 var output = Argument("output", "./output");
 var configuration = Argument("configuration", "Release");
+var suffix = Argument("suffix", DateTime.Now.ToString("yyMMdd-ss"));
 
 //////////////////////////////////////////////////////////////////////
 // PREPARATION
@@ -67,8 +67,10 @@ Task("Version")
     var version = release + "-" + suffix;
     Information("Updating AutoTensor project file");
     Information(" ====> " + version + " (" + copyright + ")");
-    XmlPoke(File("../src/AutoTensor/AutoTensor.csproj"), "//PropertyGroup/PackageVersion", version);
-    XmlPoke(File("../src/AutoTensor/AutoTensor.csproj"), "//PropertyGroup/Copyright", copyright);
+    var f = File("../src/AutoTensor/AutoTensor.csproj");
+    XmlPoke(f, "//PropertyGroup/VersionPrefix", release);
+    XmlPoke(f, "//PropertyGroup/VersionSuffix", "e" + suffix);
+    XmlPoke(f, "//PropertyGroup/Copyright", copyright);
 });
 
 Task("Restore")
@@ -115,6 +117,7 @@ Task("Docs")
 
     UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), "../docs/version.json", "_year");
     UpdateProjectJsonVersion(DateTime.Now.ToString("f"), "../docs/version.json", "_date");
+    UpdateProjectJsonVersion(suffix, "../docs/version.json", "_build");
 
 
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
