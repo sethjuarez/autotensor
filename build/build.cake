@@ -143,11 +143,11 @@ Task("DocsOnly")
     CleanDirectory(docsDir);
 
     // testing environment variables
-    Information("////////////////////////////////////////////////////////")
-    Information("Environment variables set:")
-    foreach (DictionaryEntry de in Environment.GetEnvironmentVariables()) 
+    Information("////////////////////////////////////////////////////////");
+    Information("Environment variables set:");
+    foreach (System.Collections.DictionaryEntry de in Environment.GetEnvironmentVariables()) 
         Information("         {0} = {1}", de.Key, de.Value);
-    Information("////////////////////////////////////////////////////////")
+    Information("////////////////////////////////////////////////////////");
 
     GenerateDocs(DocFxLogLevel.Default);
 });
