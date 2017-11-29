@@ -56,7 +56,12 @@
         "repo": "https://github.com/sethjuarez/autotensor",
         "branch": "dev"
       },
-      "template": [ "default" ]
+      "template": [
+        "default",
+        "autotensor"
+      ],
+      "postProcessors": [],
+      "noLangKeyword": false
     }
   }
 }
