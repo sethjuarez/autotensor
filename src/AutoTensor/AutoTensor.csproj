@@ -6,7 +6,7 @@
     <Title>AutoTensor</Title>
     <Description>Automatic tensor conversion for .NET</Description>
     <VersionPrefix>0.1.3</VersionPrefix>
-    <VersionSuffix>e171128-14</VersionSuffix>
+    <VersionSuffix>e171128-27</VersionSuffix>
     <Authors>Seth Juarez</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>http://autotensor.net</PackageProjectUrl>
