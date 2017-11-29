@@ -49,6 +49,23 @@ public static void UpdateProjectJsonVersion(string version, FilePath projectPath
     System.IO.File.WriteAllText(projectPath.FullPath, project.ToString(), Encoding.UTF8);
 }
 
+public void GenerateDocs()
+{
+    // write out version in prep for doc gen
+    var f = "../docs/version.json";
+
+    UpdateProjectJsonVersion(release, f, "_appId");
+    UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), f, "_year");
+    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), f, "_date");
+    UpdateProjectJsonVersion(suffix, f, "_build");
+
+    DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
+    {
+        OutputPath = docsDir,
+        LogLevel = DocFxLogLevel.Verbose
+    });
+}
+
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
@@ -116,48 +133,16 @@ Task("Docs")
     .IsDependentOn("Package")
     .Does(() => 
 {
-    // write out version in prep for doc gen
-    var f = "../docs/version.json";
-
-    if(!stable)
-        UpdateProjectJsonVersion(release + "-e" + suffix, f, "_appId");
-    else
-        UpdateProjectJsonVersion(release, f, "_appId");
-
-    
-    UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), f, "_year");
-    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), f, "_date");
-    UpdateProjectJsonVersion(suffix, f, "_build");
-
-
-    DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
-    {
-        OutputPath = docsDir,
-        LogLevel = DocFxLogLevel.Verbose
-    });
+    GenerateDocs();
 });
 
 Task("DocsOnly")
     .Does(() => 
 {
-    // write out version in prep for doc gen
-    var f = "../docs/version.json";
+    // need to clean in this case
+    CleanDirectory(docsDir);
 
-    if(!stable)
-        UpdateProjectJsonVersion(release + "-e" + suffix, f, "_appId");
-    else
-        UpdateProjectJsonVersion(release, f, "_appId");
-
-    
-    UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), f, "_year");
-    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), f, "_date");
-    UpdateProjectJsonVersion(suffix, f, "_build");
-
-    DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
-    {
-        OutputPath = docsDir,
-        LogLevel = DocFxLogLevel.Verbose
-    });
+    GenerateDocs();
 });
 
 //////////////////////////////////////////////////////////////////////
