@@ -49,7 +49,7 @@ public static void UpdateProjectJsonVersion(string version, FilePath projectPath
     System.IO.File.WriteAllText(projectPath.FullPath, project.ToString(), Encoding.UTF8);
 }
 
-public void GenerateDocs()
+public void GenerateDocs(DocFxLogLevel level)
 {
     // write out version in prep for doc gen
     var f = "../docs/version.json";
@@ -62,7 +62,7 @@ public void GenerateDocs()
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
     {
         OutputPath = docsDir,
-        LogLevel = DocFxLogLevel.Verbose
+        LogLevel = level
     });
 }
 
@@ -133,7 +133,7 @@ Task("Docs")
     .IsDependentOn("Package")
     .Does(() => 
 {
-    GenerateDocs();
+    GenerateDocs(DocFxLogLevel.Verbose);
 });
 
 Task("DocsOnly")
@@ -142,7 +142,14 @@ Task("DocsOnly")
     // need to clean in this case
     CleanDirectory(docsDir);
 
-    GenerateDocs();
+    // testing environment variables
+    Information("////////////////////////////////////////////////////////")
+    Information("Environment variables set:")
+    foreach (DictionaryEntry de in Environment.GetEnvironmentVariables()) 
+        Information("         {0} = {1}", de.Key, de.Value);
+    Information("////////////////////////////////////////////////////////")
+
+    GenerateDocs(DocFxLogLevel.Default);
 });
 
 //////////////////////////////////////////////////////////////////////
