@@ -132,7 +132,8 @@ Task("Docs")
 
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
     {
-        OutputPath = docsDir
+        OutputPath = docsDir,
+        LogLevel = DocFxLogLevel.Verbose
     });
 });
 
