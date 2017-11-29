@@ -62,8 +62,12 @@ public void GenerateDocs(DocFxLogLevel level)
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
     {
         OutputPath = docsDir,
+        //TemplateFolder = Directory("theme"),
         LogLevel = level
     });
+
+    Information("Copying index.html base page...");
+    CopyFile(File("../docs/index.html"), File(docsDir.ToString() + "/index.html"));
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -151,13 +155,13 @@ Task("docsonly")
     CleanDirectory(docsDir);
 
     // testing environment variables
-    Information("////////////////////////////////////////////////////////");
-    Information("Environment variables set:");
-    foreach (System.Collections.DictionaryEntry de in Environment.GetEnvironmentVariables()) 
-        Information("         {0} = {1}", de.Key, de.Value);
-    Information("////////////////////////////////////////////////////////");
+    // Information("////////////////////////////////////////////////////////");
+    // Information("Environment variables set:");
+    // foreach (System.Collections.DictionaryEntry de in Environment.GetEnvironmentVariables()) 
+    //    Information("         {0} = {1}", de.Key, de.Value);
+    // Information("////////////////////////////////////////////////////////");
 
-    GenerateDocs(DocFxLogLevel.Verbose);
+    GenerateDocs(DocFxLogLevel.Default);
 });
 
 //////////////////////////////////////////////////////////////////////
