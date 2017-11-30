@@ -2,6 +2,7 @@
 
 var restApiCommon = require('./RestApi.common.js');
 var extension = require('./RestApi.extension.js')
+var util = require('./statictoc.util.js');
 
 exports.transform = function (model) {
   if (extension && extension.preTransform) {
@@ -12,6 +13,7 @@ exports.transform = function (model) {
     model = restApiCommon.transform(model);
   }
   model._disableToc = model._disableToc || !model._tocPath || (model._navPath === model._tocPath);
+  model = util.setToc(model);
 
   if (extension && extension.postTransform) {
     model = extension.postTransform(model);

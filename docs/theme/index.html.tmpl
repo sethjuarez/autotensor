@@ -14,9 +14,6 @@
         {{^_disableNavbar}}
         {{>partials/navbar}}
         {{/_disableNavbar}}
-        {{^_disableBreadcrumb}}
-        {{>partials/breadcrumb}}
-        {{/_disableBreadcrumb}}
       </header>
       {{#_enableSearch}}
       <div class="container body-content">
@@ -38,7 +35,7 @@
           <div class="col-md-10">
           {{/_disableAffix}}
             <article class="content wrap" id="_content" data-uid="{{uid}}">
-                {{!body}}
+                {{{conceptual}}}
             </article>
           </div>
           {{^_disableAffix}}

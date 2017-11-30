@@ -67,7 +67,7 @@ public void GenerateDocs(DocFxLogLevel level)
     });
 
     Information("Copying index.html base page...");
-    CopyFile(File("../docs/index.html"), File(docsDir.ToString() + "/index.html"));
+    //CopyFile(File("../docs/index.html"), File(docsDir.ToString() + "/index.html"));
 }
 
 //////////////////////////////////////////////////////////////////////
