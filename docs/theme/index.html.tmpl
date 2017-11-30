@@ -3,7 +3,6 @@
 {{!include(/^fonts/.*/)}}
 {{!include(favicon.ico)}}
 {{!include(logo.svg)}}
-{{!include(search-stopwords.json)}}
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <html>
@@ -11,41 +10,10 @@
   <body data-spy="scroll" data-target="#affix">
     <div id="wrapper">
       <header>
-        {{^_disableNavbar}}
         {{>partials/navbar}}
-        {{/_disableNavbar}}
       </header>
-      {{#_enableSearch}}
-      <div class="container body-content">
-        {{>partials/searchResults}}
-      </div>
-      {{/_enableSearch}}
-      <div role="main" class="container body-content hide-when-search">
-      {{^_disableToc}}
-        {{>partials/toc}}
-        <div class="article row grid-right">
-      {{/_disableToc}}
-      {{#_disableToc}}
-        <div class="article row grid">
-        {{/_disableToc}}
-          {{#_disableAffix}}
-          <div class="col-md-12">
-          {{/_disableAffix}}
-          {{^_disableAffix}}
-          <div class="col-md-10">
-          {{/_disableAffix}}
-            <article class="content wrap" id="_content" data-uid="{{uid}}">
-                {{{conceptual}}}
-            </article>
-          </div>
-          {{^_disableAffix}}
-          {{>partials/affix}}
-          {{/_disableAffix}}
-        </div>
-      </div>
-      {{^_disableFooter}}
+      {{{conceptual}}}
       {{>partials/footer}}
-      {{/_disableFooter}}
     </div>
     {{>partials/scripts}}
   </body>
