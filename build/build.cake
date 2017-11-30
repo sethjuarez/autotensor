@@ -148,7 +148,7 @@ Task("Docs")
 Task("Default")
     .IsDependentOn("Docs");
 
-Task("docsonly")
+Task("docgen")
     .Does(() => 
 {
     // need to clean in this case
