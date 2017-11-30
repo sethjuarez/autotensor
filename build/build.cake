@@ -155,13 +155,18 @@ Task("docgen")
     CleanDirectory(docsDir);
 
     // testing environment variables
-    Information("////////////////////////////////////////////////////////");
-    Information("Environment variables set:");
-    foreach (System.Collections.DictionaryEntry de in Environment.GetEnvironmentVariables()) 
-        Information("\t{0} = {1}", de.Key, de.Value);
-    Information("////////////////////////////////////////////////////////");
+    var logLevel = DocFxLogLevel.Default;
 
-    GenerateDocs(DocFxLogLevel.Verbose);
+    if(logLevel == DocFxLogLevel.Verbose)
+    {
+        Information("////////////////////////////////////////////////////////");
+        Information("Environment variables set:");
+        foreach (System.Collections.DictionaryEntry de in Environment.GetEnvironmentVariables()) 
+            Information("\t{0} = {1}", de.Key, de.Value);
+        Information("////////////////////////////////////////////////////////");
+    }
+
+    GenerateDocs(logLevel);
 });
 
 //////////////////////////////////////////////////////////////////////

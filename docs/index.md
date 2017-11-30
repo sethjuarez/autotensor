@@ -1,5 +1,5 @@
 ---
-title: Welcome to DocFX website!
+title: AutoTensor.net
 documentType: index
 ---
 <div class="hero">

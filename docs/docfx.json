@@ -3,8 +3,9 @@
       {
         "src": [
           {
-            "files": [ "**/AutoTensor.csproj" ],
-            "exclude": [ "**/obj/**", "**/bin/**", "_site/**" ]
+            "files": [ "AutoTensor.csproj" ],
+            "exclude": [ "**/obj/**", "**/bin/**", "_site/**" ],
+            "cwd": "../src/AutoTensor"
           }
         ],
         "dest": "obj/api",
