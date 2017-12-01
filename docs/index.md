@@ -58,7 +58,7 @@ footer{
         <i class="glyphicon glyphicon-cutlery"></i>
         <section>
           <h2>Easy Customization</h2>
-          <p class="lead">AutoTensor provides flexible ways of creating type mappings directly into Tensor.</p>
+          <p class="lead">AutoTensor provides flexible ways of creating type mappings directly into Tensor. TEST</p>
         </section>
       </div>
     </div>
