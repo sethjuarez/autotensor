@@ -56,7 +56,7 @@ public void GenerateDocs(DocFxLogLevel level)
 
     UpdateProjectJsonVersion(release, f, "_appId");
     UpdateProjectJsonVersion(DateTime.Now.Year.ToString(), f, "_year");
-    UpdateProjectJsonVersion(DateTime.Now.ToString("f"), f, "_date");
+    UpdateProjectJsonVersion(DateTime.Now.AddHours(-8).ToString("f"), f, "_date");
     UpdateProjectJsonVersion(suffix, f, "_build");
 
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
