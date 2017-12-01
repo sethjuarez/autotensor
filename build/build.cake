@@ -155,7 +155,7 @@ Task("docgen")
     CleanDirectory(docsDir);
 
     // testing environment variables
-    var logLevel = DocFxLogLevel.Default;
+    var logLevel = DocFxLogLevel.Verbose;
 
     if(logLevel == DocFxLogLevel.Verbose)
     {
