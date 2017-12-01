@@ -8,7 +8,7 @@
         <a href="#top">Back to top</a>
       </span>
       {{{_appFooter}}}
-      {{^_appFooter}}<span>&copy;{{_year}} Seth Juarez<br>Generated on <strong>{{_date}}</strong></span>{{/_appFooter}}
+      {{^_appFooter}}<span>&copy;{{_year}} Seth Juarez and Donovan Brown<br>Generated on <strong>{{_date}}</strong></span>{{/_appFooter}}
     </div>
   </div>
 </footer>
