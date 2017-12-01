@@ -17,7 +17,7 @@ footer{
       <a class="github-link" href="https://github.com/sethjuarez/autotensor">View in Github</a>
     </div>
     <div class="minitext">
-    A documentation generation tool for API reference and Markdown files!
+      A Tensor generation tool designed to make Machine Learning easier.
     </div>
     <div class="buttons-unit">
       <a href="getting-started/index.md" class="button"><i class="glyphicon glyphicon-send"></i>Getting Started</a>
