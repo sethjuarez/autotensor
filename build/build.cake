@@ -59,6 +59,8 @@ public void GenerateDocs(DocFxLogLevel level)
     UpdateProjectJsonVersion(DateTime.Now.AddHours(-8).ToString("f"), f, "_date");
     UpdateProjectJsonVersion(suffix, f, "_build");
 
+    DocFxMetadata("../docs/docfx.json");
+
     DocFxBuild("../docs/docfx.json", new DocFxBuildSettings()
     {
         OutputPath = docsDir,
