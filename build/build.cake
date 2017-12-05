@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
-var release = "0.1.3";
+var release = "0.1.4";
 var copyright = string.Format("©{0}, Seth Juarez. All rights reserved.", DateTime.Now.Year);
 var target = Argument("target", "Default");
 var output = Argument("output", "./output");
