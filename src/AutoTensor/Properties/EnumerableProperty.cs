@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AutoTensor
+namespace AutoTensor.Properties
 {
     /// <summary>Enumerable property. Expanded feature.</summary>
     public class EnumerableProperty : Property

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AutoTensor
+namespace AutoTensor.Properties
 {
     /// <summary>Concrete property. Used to convert any given data type to a number.</summary>
     public class Property

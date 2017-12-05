@@ -1,5 +1,7 @@
 ﻿using System;
 using AutoTensor;
+using AutoTensor.Properties;
+using AutoTensor.Attributes;
 
 namespace AutoTensor.Tests.Data
 {

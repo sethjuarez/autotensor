@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace AutoTensor
+namespace AutoTensor.Properties
 {
     /// <summary>Enumeration describing how to split a string property.</summary>
     public enum StringSplitType

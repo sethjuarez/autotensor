@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using AutoTensor.Properties;
 using System.Collections;
 using System.Collections.Generic;
 

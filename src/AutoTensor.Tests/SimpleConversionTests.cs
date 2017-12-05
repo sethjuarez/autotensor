@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Dynamic;
 using AutoTensor;
+using AutoTensor.Properties;
 using AutoTensor.Tests.Data;
 using Xunit;
 using System.Collections.Generic;

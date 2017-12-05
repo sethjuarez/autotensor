@@ -1,7 +1,9 @@
 ﻿using AutoTensor;
+using AutoTensor.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using Xunit;
 
 namespace AutoTensor.Tests
@@ -308,6 +310,50 @@ namespace AutoTensor.Tests
             Assert.Equal(13, d.Features[4].Start);
             // proper length
             Assert.Equal(10, d.Features[2].Length);
+        }
+
+        [Fact]
+        public void Test_Vector_Conversion_OneHot_Encoding()
+        {
+            Descriptor d = new Descriptor();
+
+            d.Features = new Property[]
+            {
+                new OneHotProperty(4) { Name = "SuperOneHot" }
+            };
+
+            var o = new[] {
+                new { SuperOneHot = "One" },   // 1, 0, 0, 0
+                new { SuperOneHot = "Two" },   // 0, 1, 0, 0
+                new { SuperOneHot = "Three" }, // 0, 0, 1, 0
+                new { SuperOneHot = "Two" },   // 0, 1, 0, 0
+                new { SuperOneHot = "Three" }, // 0, 0, 1, 0
+                new { SuperOneHot = "Two" },   // 0, 1, 0, 0
+                new { SuperOneHot = "one" },   // 1, 0, 0, 0
+                new { SuperOneHot = "Four" },  // 0, 0, 0, 1
+                new { SuperOneHot = "Two" },   // 0, 1, 0, 0
+                new { SuperOneHot = "one" },   // 1, 0, 0, 0
+                new { SuperOneHot = "Three" }, // 0, 0, 1, 0
+                new { SuperOneHot = "Four" }   // 0, 0, 0, 1
+            };
+
+            var truth = new double[,] {
+                { 1, 0, 0, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                { 0, 1, 0, 0 },
+                { 0, 0, 1, 0 },
+                { 0, 1, 0, 0 },
+                { 1, 0, 0, 0 },
+                { 0, 0, 0, 1 },
+                { 0, 1, 0, 0 },
+                { 1, 0, 0, 0 },
+                { 0, 0, 1, 0 },
+                { 0, 0, 0, 1 }
+            }.ToTensor();
+            
+            var output = d.Convert(o).ToMatrix();
+            Assert.Equal(truth, output);
         }
     }
 }

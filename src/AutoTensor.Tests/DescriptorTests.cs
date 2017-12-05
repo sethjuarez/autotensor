@@ -4,6 +4,7 @@ using System.Linq;
 using AutoTensor.Tests.Data;
 using Xunit;
 using FluentAssertions;
+using AutoTensor.Properties;
 
 namespace AutoTensor.Tests
 {

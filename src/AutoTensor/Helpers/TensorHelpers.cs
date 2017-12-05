@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace AutoTensor
 {
-    public static class Helpers
+    public static class TensorHelpers
     {
         public static Tensor<double> ToVector(this IEnumerable<double> seq)
         {

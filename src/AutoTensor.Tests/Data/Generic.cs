@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using AutoTensor;
+using AutoTensor.Properties;
+using AutoTensor.Attributes;
 
 namespace AutoTensor.Tests.Data
 {

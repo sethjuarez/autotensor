@@ -9,6 +9,8 @@ using System.Reflection;
 using System.Collections;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using AutoTensor.Properties;
+using AutoTensor.Attributes;
 using System.Numerics;
 
 namespace AutoTensor

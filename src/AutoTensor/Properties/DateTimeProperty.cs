@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AutoTensor
+namespace AutoTensor.Properties
 {
     /// <summary>Features available for the DateTime property.</summary>
     [Flags]

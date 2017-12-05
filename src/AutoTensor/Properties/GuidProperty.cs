@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AutoTensor
+namespace AutoTensor.Properties
 {
 	/// <summary>Represents a guid property.</summary>
 	public class GuidProperty : Property
@@ -14,7 +14,7 @@ namespace AutoTensor
 			// set to default conventions
 			Categories = new Guid[] { };
 			Type = typeof(Guid);
-			Discrete = false;
+			Discrete = true;
 		}
 		
 		/// <value>The categories.</value>

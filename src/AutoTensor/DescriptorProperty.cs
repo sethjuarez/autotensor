@@ -1,4 +1,5 @@
 using System;
+using AutoTensor.Properties;
 using System.Collections.Generic;
 
 namespace AutoTensor

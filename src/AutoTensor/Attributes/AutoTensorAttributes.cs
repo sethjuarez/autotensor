@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using System.Collections;
+using AutoTensor.Properties;
 
-namespace AutoTensor
+namespace AutoTensor.Attributes
 {
 	/// <summary>Attribute for numl.</summary>
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
