@@ -33,6 +33,7 @@ namespace AutoTensor.Properties
         /// <summary>Discrete or continuous value.</summary>
         /// <value>true if discrete, false if not.</value>
         public virtual bool Discrete { get; set; }
+
         /// <summary>
         /// Used as a preprocessing step when overridden. Can be used to look at the entire data set as a
         /// whole before converting single elements.
@@ -43,7 +44,7 @@ namespace AutoTensor.Properties
             return;
         }
         /// <summary>
-        /// Used as a preprocessing step when overriden. Can be used to look at the current object in
+        /// Used as a preprocessing step when overridden. Can be used to look at the current object in
         /// question before converting single elements.
         /// </summary>
         /// <param name="example">Example.</param>
@@ -61,8 +62,8 @@ namespace AutoTensor.Properties
             return;
         }
         /// <summary>
-        /// Used as a postprocessing step when overriden. Can be used to look at the current object in
-        /// question fater converting single elements.
+        /// Used as a postprocessing step when overridden. Can be used to look at the current object in
+        /// question after converting single elements.
         /// </summary>
         /// <param name="example">.</param>
         public virtual void PostProcess(object example)

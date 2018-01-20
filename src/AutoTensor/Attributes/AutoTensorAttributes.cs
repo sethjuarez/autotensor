@@ -6,7 +6,7 @@ using AutoTensor.Properties;
 
 namespace AutoTensor.Attributes
 {
-	/// <summary>Attribute for numl.</summary>
+	/// <summary>Attribute for AutoTensor.</summary>
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 	public abstract class AutoTensorAttribute : Attribute
 	{
