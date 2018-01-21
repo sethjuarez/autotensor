@@ -1,0 +1,115 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using Xunit;
+using System;
+using System.Linq;
+using AutoTensor.Property.Simple;
+using System.Collections.Generic;
+
+namespace AutoTensor.Tests.Simple
+{
+<#
+	string[] simpleTypes = new [] { 
+		"sbyte", 
+		"byte", 
+		"short", 
+		"ushort", 
+		"int",
+		"uint",
+		"long",
+		"char",
+		"float",
+		"ulong" };
+
+	foreach(var item in simpleTypes)
+	{
+#>
+	public class <#= ClassName(item) #>Tests 
+	{ 
+        [Fact]
+        public void Convert_To_Target_Test()
+        {
+            var property = new <#= ClassName(item) #>();
+            for(int i = 0; i < 128; i++)
+            {
+                var o = property.ToValue((<#= item #>)i);
+                Assert.Equal(1, o.Count());
+                Assert.Equal((float)i, o.First());
+            }
+        }
+
+        [Fact]
+        public void Convert_To_Source_Test()
+        {
+            var property = new <#= ClassName(item) #>();
+            for (int i = 0; i < 255; i++)
+            {
+                IEnumerable<float> val = new[] { (float)i };
+                var o = property.ToSource(val);
+                Assert.Equal((<#= item #>)i, o);
+            }
+        }
+
+        [Fact]
+        public void Length_Test()
+        {
+            var property = new <#= ClassName(item) #>();
+            Assert.Equal(1, property.Length);
+        }
+
+        [Fact] 
+        public void Name_Test()
+        {
+            string name = "name";
+            var property = new <#= ClassName(item) #>() { Name = name };
+            var cols = property.GetColumns();
+            Assert.Equal(1, cols.Count());
+            Assert.Equal(name, cols.First());
+        }
+
+        [Fact]
+        public void Position_Test()
+        {
+            int pos = 1;
+            var property = new <#= ClassName(item) #>() { Position = pos };
+            Assert.Equal(pos, property.Position);
+        }
+
+        [Fact]
+        public void Type_Test()
+        {
+            Type type = typeof(<#= item #>);
+            var property = new <#= ClassName(item) #>();
+            Assert.Equal(type, property.Type);
+        }
+
+        [Fact]
+        public void Process_Test()
+        {
+            var property = new <#= ClassName(item) #>();
+            IEnumerable<<#= item #>> values = new <#= item #>[] 
+			{ 
+				(<#= item #>)1, 
+				(<#= item #>)2, 
+				(<#= item #>)3, 
+				(<#= item #>)4 
+			};
+            property.PreProcess(values);
+            property.PreProcess(values.First());
+
+            property.PostProcess(values.First());
+            property.PostProcess(values);
+        }
+    }
+<#
+	}
+#>
+}
+<#
+ string ClassName(string name)  
+ { return name[0].ToString().ToUpperInvariant() + name.Substring(1) + "Property"; }  
+#>  

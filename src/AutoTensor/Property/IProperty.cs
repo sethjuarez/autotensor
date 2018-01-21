@@ -9,7 +9,7 @@ namespace AutoTensor.Property
     /// a list of floats to stuff into a Tensor
     /// </summary>
     /// <typeparam name="T">Type to convert</typeparam>
-    public interface IProperty<T>
+    public interface IProperty<S, T>
     {
         /// <summary>
         /// Property name
@@ -41,30 +41,36 @@ namespace AutoTensor.Property
         /// whole before converting single elements.
         /// </summary>
         /// <param name="items">items to pre-process</param>
-        void PreProcess(IEnumerable<T> items);
+        void PreProcess(IEnumerable<S> items);
         /// <summary>
         /// Used as a preprocessing step when overridden. Can be used to look at the current object in
         /// question before converting single elements.
         /// </summary>
         /// <param name="item">item to pre-process</param>
-        void PreProcess(T item);
+        void PreProcess(S item);
         /// <summary>
         /// Used as a postprocessing step when overridden. Can be used to look at the entire data set as
         /// a whole after converting single elements.
         /// </summary>
         /// <param name="items">Items to post process</param>
-        void PostProcess(IEnumerable<T> items);
+        void PostProcess(IEnumerable<S> items);
         /// <summary>
         /// Used as a postprocessing step when overridden. Can be used to look at the current object in
         /// question after converting single elements.
         /// </summary>
         /// <param name="item">Item to post process</param>
-        void PostProcess(T item);
+        void PostProcess(S item);
         /// <summary>
         /// Convert source object to lazy list of floats
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        IEnumerable<float> ToValue(T source);
+        IEnumerable<T> ToValue(S source);
+        /// <summary>
+        /// Convert list of float values to source object
+        /// </summary>
+        /// <param name="values">float values</param>
+        /// <returns>source object</returns>
+        S ToSource(IEnumerable<T> values);
     }
 }
