@@ -5,10 +5,11 @@ using System.Text;
 namespace AutoTensor.Property
 {
     /// <summary>
-    /// Property interface designed to convert any type to
-    /// a list of floats to stuff into a Tensor
+    /// Property conversion interface designed to convert from S to 
+    /// a list of T
     /// </summary>
-    /// <typeparam name="T">Type to convert</typeparam>
+    /// <typeparam name="S">Source type</typeparam>
+    /// <typeparam name="T">Target type</typeparam>
     public interface IProperty<S, T>
     {
         /// <summary>

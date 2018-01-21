@@ -26,32 +26,11 @@ namespace AutoTensor.Property.Simple
 	foreach(var item in simpleTypes)
 	{
 #>
-	public class <#= ClassName(item) #> : IProperty<<#= item #>, float>
+	public class <#= ClassName(item) #> : PropertyBase<<#= item #>>
 	{ 
-	    public string Name { get; set; }
+        public override <#= item #> ToSource(IEnumerable<float> values) => (<#= item #>)values.First();
 
-        public Type Type => typeof(<#= item #>);
-
-        public int Position { get; set; }
-
-        public int Length => 1;
-
-        public IEnumerable<string> GetColumns()
-        {
-            yield return Name;
-        }
-
-        public void PostProcess(IEnumerable<<#= item #>> items) { }
-
-        public void PostProcess(<#= item #> item) { }
-
-        public void PreProcess(IEnumerable<<#= item #>> items) { }
-
-        public void PreProcess(<#= item #> item) { }
-
-        public <#= item #> ToSource(IEnumerable<float> values) => (<#= item #>)values.First();
-
-        public IEnumerable<float> ToValue(<#= item #> source)
+        public override IEnumerable<float> ToValue(<#= item #> source)
         {
             yield return (float)source;
         }

@@ -105,6 +105,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 <#
 	}
 #>

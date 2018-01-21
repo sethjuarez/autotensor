@@ -83,6 +83,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class BytePropertyTests 
 	{ 
         [Fact]
@@ -160,6 +161,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class ShortPropertyTests 
 	{ 
         [Fact]
@@ -237,6 +239,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class UshortPropertyTests 
 	{ 
         [Fact]
@@ -314,6 +317,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class IntPropertyTests 
 	{ 
         [Fact]
@@ -391,6 +395,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class UintPropertyTests 
 	{ 
         [Fact]
@@ -468,6 +473,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class LongPropertyTests 
 	{ 
         [Fact]
@@ -545,6 +551,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class CharPropertyTests 
 	{ 
         [Fact]
@@ -622,6 +629,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class FloatPropertyTests 
 	{ 
         [Fact]
@@ -699,6 +707,7 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 	public class UlongPropertyTests 
 	{ 
         [Fact]
@@ -776,5 +785,6 @@ namespace AutoTensor.Tests.Simple
             property.PostProcess(values);
         }
     }
+
 }
   
