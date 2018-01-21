@@ -68,7 +68,7 @@ namespace AutoTensor.Property.Complex
         TimeExtended = 0x0010
     }
 
-    public class DateTimeProperty : PropertyBase<DateTime>
+    public class DateTimeProperty : BaseProperty<DateTime>
     {
         /// <summary>Default constructor.</summary>
         public DateTimeProperty()
@@ -171,7 +171,9 @@ namespace AutoTensor.Property.Complex
 
         public override DateTime ToSource(IEnumerable<float> values)
         {
-            throw new NotImplementedException();
+
+
+            return DateTime.Now;
         }
 
         public override IEnumerable<float> ToValue(DateTime source)
@@ -194,28 +196,6 @@ namespace AutoTensor.Property.Complex
                 yield return source.Second;
             if (Features.HasFlag(DateTimeFeature.Millisecond))
                 yield return source.Millisecond;
-        }
-
-        /// <summary>
-        /// Equality test
-        /// </summary>
-        /// <param name="obj">object to compare</param>
-        /// <returns>equality</returns>
-        public override bool Equals(object obj)
-        {
-            if (base.Equals(obj) && obj is DateTimeProperty)
-                return Features == ((DateTimeProperty)obj).Features;
-            else
-                return false;
-        }
-
-        /// <summary>
-        /// Return hash
-        /// </summary>
-        /// <returns>hash</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutoTensor.Property
 {
-    public abstract class PropertyBase<S> : IProperty<S, float>
+    public abstract class BaseProperty<S> : IProperty<S, float>
     {
         public string Name { get; set; }
 

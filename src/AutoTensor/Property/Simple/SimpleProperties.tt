@@ -26,9 +26,10 @@ namespace AutoTensor.Property.Simple
 	foreach(var item in simpleTypes)
 	{
 #>
-	public class <#= ClassName(item) #> : PropertyBase<<#= item #>>
+	public class <#= ClassName(item) #> : BaseProperty<<#= item #>>
 	{ 
-        public override <#= item #> ToSource(IEnumerable<float> values) => (<#= item #>)values.First();
+        public override <#= item #> ToSource(IEnumerable<float> values) 
+			=> (<#= item #>)values.First();
 
         public override IEnumerable<float> ToValue(<#= item #> source)
         {
