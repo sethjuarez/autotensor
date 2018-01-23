@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using System;
 using System.Linq;
-using AutoTensor.Property.Simple;
+using AutoTensor.Features.Simple;
 using System.Collections.Generic;
 
 namespace AutoTensor.Tests.Simple

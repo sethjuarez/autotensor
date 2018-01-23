@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace AutoTensor.Property
+namespace AutoTensor.Features
 {
     /// <summary>
-    /// Property conversion interface designed to convert from S to 
-    /// a list of T
+    /// Basic property that will be used to convert
+    /// a type to a section of a tensor object
     /// </summary>
     /// <typeparam name="S">Source type</typeparam>
     /// <typeparam name="T">Target type</typeparam>
-    public interface IProperty<S, T>
+    public interface IProperty
     {
         /// <summary>
         /// Property name
         /// </summary>
-        string Name { get; }
+        string Name { get; set; }
         /// <summary>
         /// Explicit type of source object
         /// </summary>
@@ -37,6 +36,9 @@ namespace AutoTensor.Property
         /// </returns>
         IEnumerable<string> GetColumns();
 
+    }
+    public interface IConverter<S, T>
+    { 
         /// <summary>
         /// Used as a preprocessing step when overridden. Can be used to look at the entire data set as a
         /// whole before converting single elements.

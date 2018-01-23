@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AutoTensor.Property.Complex
+namespace AutoTensor.Features.Complex
 {
     /// <summary>Features available for the DateTime property.</summary>
     [Flags]
@@ -68,7 +68,7 @@ namespace AutoTensor.Property.Complex
         TimeExtended = 0x0010
     }
 
-    public class DateTimeProperty : BaseProperty<DateTime>
+    public class DateTimeProperty : Property<DateTime>
     {
         /// <summary>Default constructor.</summary>
         public DateTimeProperty()

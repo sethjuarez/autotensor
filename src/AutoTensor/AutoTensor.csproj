@@ -18,40 +18,17 @@
     <NeutralLanguage />
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <Compile Remove="Attributes\**" />
-    <Compile Remove="Helpers\**" />
-    <EmbeddedResource Remove="Attributes\**" />
-    <EmbeddedResource Remove="Helpers\**" />
-    <None Remove="Attributes\**" />
-    <None Remove="Helpers\**" />
+    <PackageReference Include="System.Numerics.Tensors" Version="0.1.0-*" />
   </ItemGroup>
-
+    
   <ItemGroup>
-    <Compile Remove="Descriptor.cs" />
-    <Compile Remove="DescriptorException.cs" />
-    <Compile Remove="DescriptorProperty.cs" />
-    <Compile Remove="Property.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Property\Simple\SimpleProperties.cs">
+    <Compile Update="Features\Simple\SimpleProperties.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SimpleProperties.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="System.Numerics.Tensors" Version="0.1.0-e171125-2" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-  
-  <ItemGroup>
+    </Compile>
     <Compile Update="Property\Simple\SimpleProperties.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -60,10 +37,21 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Update="Property\Simple\SimpleProperties.tt">
+    <None Update="Features\Simple\SimpleProperties.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SimpleProperties.cs</LastGenOutput>
     </None>
+    <None Update="Proeprties\Simple\SimpleProperties.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

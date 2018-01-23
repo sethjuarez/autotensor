@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace AutoTensor.Property
+namespace AutoTensor.Features
 {
-    public abstract class BaseProperty<S> : IProperty<S, float>
+    public abstract class Property<S> : IProperty, IConverter<S, float>
     {
         public string Name { get; set; }
 

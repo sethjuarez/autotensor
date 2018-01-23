@@ -6,14 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\**" />
-    <EmbeddedResource Remove="Data\**" />
-    <None Remove="Data\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="ComplexConversionTests.cs" />
-    <Compile Remove="DescriptorTests.cs" />
     <Compile Remove="LinAlgConversionTests.cs" />
     <Compile Remove="SimpleConversionTests.cs" />
   </ItemGroup>

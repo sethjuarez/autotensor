@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 
-namespace AutoTensor.Property.Simple
+namespace AutoTensor.Features.Simple
 {
-	public class SbyteProperty : BaseProperty<sbyte>
+	public class SbyteProperty : Property<sbyte>
 	{ 
         public override sbyte ToSource(IEnumerable<float> values) 
 			=> (sbyte)values.First();
@@ -15,7 +15,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class ByteProperty : BaseProperty<byte>
+	public class ByteProperty : Property<byte>
 	{ 
         public override byte ToSource(IEnumerable<float> values) 
 			=> (byte)values.First();
@@ -26,7 +26,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class ShortProperty : BaseProperty<short>
+	public class ShortProperty : Property<short>
 	{ 
         public override short ToSource(IEnumerable<float> values) 
 			=> (short)values.First();
@@ -37,7 +37,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class UshortProperty : BaseProperty<ushort>
+	public class UshortProperty : Property<ushort>
 	{ 
         public override ushort ToSource(IEnumerable<float> values) 
 			=> (ushort)values.First();
@@ -48,7 +48,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class IntProperty : BaseProperty<int>
+	public class IntProperty : Property<int>
 	{ 
         public override int ToSource(IEnumerable<float> values) 
 			=> (int)values.First();
@@ -59,7 +59,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class UintProperty : BaseProperty<uint>
+	public class UintProperty : Property<uint>
 	{ 
         public override uint ToSource(IEnumerable<float> values) 
 			=> (uint)values.First();
@@ -70,7 +70,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class LongProperty : BaseProperty<long>
+	public class LongProperty : Property<long>
 	{ 
         public override long ToSource(IEnumerable<float> values) 
 			=> (long)values.First();
@@ -81,7 +81,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class CharProperty : BaseProperty<char>
+	public class CharProperty : Property<char>
 	{ 
         public override char ToSource(IEnumerable<float> values) 
 			=> (char)values.First();
@@ -92,7 +92,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class FloatProperty : BaseProperty<float>
+	public class FloatProperty : Property<float>
 	{ 
         public override float ToSource(IEnumerable<float> values) 
 			=> (float)values.First();
@@ -103,7 +103,7 @@ namespace AutoTensor.Property.Simple
         }
 	}
 
-	public class UlongProperty : BaseProperty<ulong>
+	public class UlongProperty : Property<ulong>
 	{ 
         public override ulong ToSource(IEnumerable<float> values) 
 			=> (ulong)values.First();

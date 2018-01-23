@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace AutoTensor.Property.Simple
+namespace AutoTensor.Features.Simple
 {
 <#
 	string[] simpleTypes = new [] { 
@@ -26,7 +26,7 @@ namespace AutoTensor.Property.Simple
 	foreach(var item in simpleTypes)
 	{
 #>
-	public class <#= ClassName(item) #> : BaseProperty<<#= item #>>
+	public class <#= ClassName(item) #> : Property<<#= item #>>
 	{ 
         public override <#= item #> ToSource(IEnumerable<float> values) 
 			=> (<#= item #>)values.First();
