@@ -8,7 +8,7 @@ using System.Collections.Concurrent;
 
 namespace AutoTensor
 {
-    public static class TypeHelpers
+    public static class Ject
     {
         /// <summary>Gets property information.</summary>
 		/// <tparam name="K">Generic type parameter.</tparam>
@@ -30,6 +30,14 @@ namespace AutoTensor
         /// </summary>
         private static readonly ConcurrentDictionary<Type, Type> _properties =
             new ConcurrentDictionary<Type, Type>();
+
+        public static IProperty FindProperty(PropertyInfo pi)
+        {
+            var p = FindProperty(pi.PropertyType);
+            p.Name = pi.Name;
+            return p;
+        }
+
         public static IProperty FindProperty(Type sourceType)
         {
             // cached
@@ -48,9 +56,11 @@ namespace AutoTensor
                     return Activator.CreateInstance(types[0]) as IProperty;
                 }
                 else if (types.Length == 0)
-                    throw new InvalidCastException($"Cannot find appropriate feature Property for {nameof(sourceType)}");
+                    throw new InvalidCastException(
+                        $"Cannot find appropriate feature Property for {nameof(sourceType)}");
                 else
-                    throw new InvalidCastException($"Found too many feature Property implementations for {nameof(sourceType)}: {string.Join(", ", types.Select(t => t.Name).ToArray())}");
+                    throw new InvalidCastException(
+                        $"Found too many feature Property implementations for {nameof(sourceType)}: {string.Join(", ", types.Select(t => t.Name).ToArray())}");
             }
         }
 

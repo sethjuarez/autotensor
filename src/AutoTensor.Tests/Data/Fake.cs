@@ -6,8 +6,13 @@ namespace AutoTensor.Tests.Data
 {
     public class Fake
     {
+        [Feature]
         public long A { get; set; }
+
+        [Feature]
         public short B { get; set; }
+
+        [Feature]
         public char C { get; set; }
 
         public static IEnumerable<Fake> GetObjects()

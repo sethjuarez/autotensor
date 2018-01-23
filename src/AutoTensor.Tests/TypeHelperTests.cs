@@ -1,6 +1,6 @@
 ﻿using AutoTensor.Features;
 using AutoTensor.Features.Simple;
-using static AutoTensor.TypeHelpers;
+using static AutoTensor.Ject;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -27,8 +27,11 @@ namespace AutoTensor.Tests
 
             Assert.Equal(3, d.Features.Length);
             Assert.Equal(typeof(LongProperty), d.Features[0].GetType());
+            Assert.Equal("A", d.Features[0].Name);
             Assert.Equal(typeof(ShortProperty), d.Features[1].GetType());
+            Assert.Equal("B", d.Features[1].Name);
             Assert.Equal(typeof(CharProperty), d.Features[2].GetType());
+            Assert.Equal("C", d.Features[2].Name);
         }
 
         [Fact]
@@ -41,8 +44,25 @@ namespace AutoTensor.Tests
 
             Assert.Equal(3, d.Features.Length);
             Assert.Equal(typeof(LongProperty), d.Features[0].GetType());
+            Assert.Equal("A", d.Features[0].Name);
             Assert.Equal(typeof(ShortProperty), d.Features[1].GetType());
+            Assert.Equal("B", d.Features[1].Name);
             Assert.Equal(typeof(CharProperty), d.Features[2].GetType());
+            Assert.Equal("C", d.Features[2].Name);
+        }
+
+        [Fact]
+        public void Test_Strong_Descriptor_Creation()
+        {
+            //var d = Descriptor.Create()
+
+            //Assert.Equal(3, d.Features.Length);
+            //Assert.Equal(typeof(LongProperty), d.Features[0].GetType());
+            //Assert.Equal("A", d.Features[0].Name);
+            //Assert.Equal(typeof(ShortProperty), d.Features[1].GetType());
+            //Assert.Equal("B", d.Features[1].Name);
+            //Assert.Equal(typeof(CharProperty), d.Features[2].GetType());
+            //Assert.Equal("C", d.Features[2].Name);
         }
     }
 }
