@@ -72,15 +72,14 @@ namespace AutoTensor.Features.Complex
     {
         /// <summary>Default constructor.</summary>
         public DateTimeProperty()
-            : base()
         {
-            Initialize(DatePortion.Date | DatePortion.DateExtended);
+            Features = ConvertToFeatures(DatePortion.Date | DatePortion.DateExtended);
         }
         /// <summary>Constructor.</summary>
         /// <param name="portion">The portion.</param>
         public DateTimeProperty(DatePortion portion)
         {
-            Initialize(portion);
+            Features = ConvertToFeatures(portion);
         }
         /// <summary>Constructor.</summary>
         /// <param name="features">The features.</param>
@@ -89,23 +88,23 @@ namespace AutoTensor.Features.Complex
             Features = features;
         }
 
-        /// <summary>Initializes this object.</summary>
-        /// <param name="portion">The portion.</param>
-        private void Initialize(DatePortion portion)
+        public static DateTimeFeature ConvertToFeatures(DatePortion portion)
         {
-            Features = 0;
+            DateTimeFeature features = 0;
             if (portion.HasFlag(DatePortion.Date))
-                Features |= DateTimeFeature.Year | DateTimeFeature.Month |
+                features |= DateTimeFeature.Year | DateTimeFeature.Month |
                            DateTimeFeature.Day;
 
             if (portion.HasFlag(DatePortion.DateExtended))
-                Features |= DateTimeFeature.DayOfYear | DateTimeFeature.DayOfWeek;
+                features |= DateTimeFeature.DayOfYear | DateTimeFeature.DayOfWeek;
 
             if (portion.HasFlag(DatePortion.Time))
-                Features |= DateTimeFeature.Hour | DateTimeFeature.Minute;
+                features |= DateTimeFeature.Hour | DateTimeFeature.Minute;
 
             if (portion.HasFlag(DatePortion.TimeExtended))
-                Features |= DateTimeFeature.Second | DateTimeFeature.Millisecond;
+                features |= DateTimeFeature.Second | DateTimeFeature.Millisecond;
+
+            return features;
         }
 
         /// <summary>Gets or sets the features.</summary>
@@ -171,9 +170,7 @@ namespace AutoTensor.Features.Complex
 
         public override DateTime ToSource(IEnumerable<float> values)
         {
-
-
-            return DateTime.Now;
+            throw new NotImplementedException();
         }
 
         public override IEnumerable<float> ToValue(DateTime source)
@@ -196,6 +193,30 @@ namespace AutoTensor.Features.Complex
                 yield return source.Second;
             if (Features.HasFlag(DateTimeFeature.Millisecond))
                 yield return source.Millisecond;
+        }
+    }
+
+    /// <summary>Attribute for date feature.</summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class DateTimeFeatureAttribute : FeatureAttribute
+    {
+        DateTimeFeature _features;
+
+        public DateTimeFeatureAttribute(DateTimeFeature features)
+        {
+            _features = features;
+        }
+
+        public DateTimeFeatureAttribute(DatePortion portion)
+        {
+            _features = DateTimeProperty.ConvertToFeatures(portion);
+        }
+
+        public override IProperty PopulateProperty(IProperty property)
+        {
+            var dtp = property as DateTimeProperty;
+            dtp.Features = _features;
+            return dtp;
         }
     }
 }

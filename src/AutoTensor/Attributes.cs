@@ -1,19 +1,18 @@
-﻿using AutoTensor.Features;
-using static AutoTensor.Ject;
-using System;
-using System.Reflection;
+﻿using System;
+using AutoTensor.Features;
+
 
 namespace AutoTensor
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class FeatureAttribute : Attribute
     {
-        public virtual IProperty GenerateProperty(PropertyInfo pi)
+        public virtual IProperty PopulateProperty(IProperty property)
         {
-            return FindProperty(pi);
+            return property;
         }
     }
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class LabelAttribute : Attribute { }
+    public sealed class LabelAttribute : FeatureAttribute { }
 }

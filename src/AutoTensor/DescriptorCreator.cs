@@ -18,50 +18,49 @@ namespace AutoTensor
         public static Descriptor<T> Create<T>()
         {
             var d = For<T>();
+
             // find all features
             List<IProperty> features = new List<IProperty>();
             List<IProperty> labels = new List<IProperty>();
             var t = typeof(T);
-            foreach (var property in t.GetProperties())
+            foreach (var pi in t.GetProperties())
             {
-                var item = property.GetCustomAttributes(typeof(FeatureAttribute), false);
+                var f = pi.GetCustomAttributes(typeof(FeatureAttribute), false);
 
-                var featureAttribute = property.GetCustomAttributes(typeof(FeatureAttribute), false);
-                var isFeature = featureAttribute.Count() == 1;
-                var isLabel = property.GetCustomAttributes(typeof(LabelAttribute), false).Count() == 1;
-
-
-                if(isFeature && !isLabel)
+                // has a feature attribute
+                if (f.Count() == 1)
                 {
+                    var feature = f.First() as FeatureAttribute;
+                    var property = FindProperty(pi);
+                    feature.PopulateProperty(property);
 
+                    // is it a label?
+                    if (IsLabel(feature))
+                        labels.Add(property);
+                    else
+                        features.Add(property);
                 }
-                
-
-                //// has feature attribute
-                if (item.Count() == 1)
+                // has a feature and a label attribute
+                else if (f.Count() == 2)
                 {
-                //    var p = FindProperty
+                    var f1 = f.ElementAt(0) as FeatureAttribute;
+                    var f2 = f.ElementAt(1) as FeatureAttribute;
 
+                    // both are feature attributes (no, no)
+                    if(IsFeature(f1) && IsFeature(f2))
+                        throw new InvalidOperationException($"{t.Name}.{pi.Name} has too many feature attributes.");
 
-
-                    // generate appropriate property from attribute
-                    //Property p = attrib.GenerateProperty(property);
-
-                    //// feature
-                    //if (attrib.GetType().GetTypeInfo().IsSubclassOf(typeof(FeatureAttribute)) ||
-                    //    attrib is FeatureAttribute)
-                    //    features.Add(p);
-                    //// label
-                    //else if (attrib.GetType().GetTypeInfo().IsSubclassOf(typeof(LabelAttribute)) ||
-                    //    attrib is LabelAttribute)
-                    //{
-                    //    if (label != null)
-                    //        throw new InvalidOperationException("Cannot have multiple labels in a class");
-                    //    label = p;
-                    //}
+                    var feature = f1.GetType() == typeof(LabelAttribute) ? f2 : f1;
+                    var property = FindProperty(pi);
+                    feature.PopulateProperty(property);
+                    labels.Add(property);
                 }
+                else
+                    throw new InvalidOperationException($"{t.Name}.{pi.Name} has too many attributes.");
             }
 
+            d.Features = features.ToArray();
+            d.Labels = labels.ToArray();
 
             return d;
         }
@@ -70,6 +69,13 @@ namespace AutoTensor
         {
             return new Descriptor<T>() { Name = typeof(T).Name };
         }
+
+        private static bool IsFeature(FeatureAttribute attr) =>
+            attr.GetType() == typeof(FeatureAttribute) ||
+            attr.GetType().IsSubclassOf(typeof(FeatureAttribute));
+
+        private static bool IsLabel(FeatureAttribute attr) =>
+            attr.GetType() == typeof(LabelAttribute);
     }
 
 
