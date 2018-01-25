@@ -70,20 +70,36 @@ namespace AutoTensor.Features.Complex
 
     public class DateTimeProperty : Property<DateTime>
     {
-        /// <summary>Default constructor.</summary>
-        public DateTimeProperty()
+        public DateTimeProperty() 
+            : base()
         {
             Features = ConvertToFeatures(DatePortion.Date | DatePortion.DateExtended);
         }
-        /// <summary>Constructor.</summary>
-        /// <param name="portion">The portion.</param>
+
+        public DateTimeProperty(string name)
+            : base(name)
+        {
+            Features = ConvertToFeatures(DatePortion.Date | DatePortion.DateExtended);
+        }
+
         public DateTimeProperty(DatePortion portion)
         {
             Features = ConvertToFeatures(portion);
         }
-        /// <summary>Constructor.</summary>
-        /// <param name="features">The features.</param>
+
         public DateTimeProperty(DateTimeFeature features)
+        {
+            Features = features;
+        }
+
+        public DateTimeProperty(string name, DatePortion portion)
+            : base(name)
+        {
+            Features = ConvertToFeatures(portion);
+        }
+
+        public DateTimeProperty(string name, DateTimeFeature features)
+            : base(name)
         {
             Features = features;
         }
@@ -170,7 +186,7 @@ namespace AutoTensor.Features.Complex
 
         public override DateTime ToSource(IEnumerable<float> values)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Converting back to dates does not make sense....");
         }
 
         public override IEnumerable<float> ToValue(DateTime source)

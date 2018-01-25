@@ -65,7 +65,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new <#= ClassName(item) #>() { Name = name };
+            var property = new <#= ClassName(item) #>(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());

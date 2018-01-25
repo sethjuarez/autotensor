@@ -43,7 +43,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new SbyteProperty() { Name = name };
+            var property = new SbyteProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -121,7 +121,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new ByteProperty() { Name = name };
+            var property = new ByteProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -199,7 +199,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new ShortProperty() { Name = name };
+            var property = new ShortProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -277,7 +277,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new UshortProperty() { Name = name };
+            var property = new UshortProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -355,7 +355,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new IntProperty() { Name = name };
+            var property = new IntProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -433,7 +433,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new UintProperty() { Name = name };
+            var property = new UintProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -511,7 +511,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new LongProperty() { Name = name };
+            var property = new LongProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -589,7 +589,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new CharProperty() { Name = name };
+            var property = new CharProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -667,7 +667,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new FloatProperty() { Name = name };
+            var property = new FloatProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());
@@ -745,7 +745,7 @@ namespace AutoTensor.Tests.Simple
         public void Name_Test()
         {
             string name = "name";
-            var property = new UlongProperty() { Name = name };
+            var property = new UlongProperty(name);
             var cols = property.GetColumns();
             Assert.Equal(1, cols.Count());
             Assert.Equal(name, cols.First());

@@ -27,7 +27,10 @@ namespace AutoTensor.Features.Simple
 	{
 #>
 	public class <#= ClassName(item) #> : Property<<#= item #>>
-	{ 
+	{
+		public <#= ClassName(item) #>() : base() { }
+		public <#= ClassName(item) #>(string name) : base(name) { }
+
         public override <#= item #> ToSource(IEnumerable<float> values) 
 			=> (<#= item #>)values.First();
 

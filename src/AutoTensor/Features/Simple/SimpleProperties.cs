@@ -5,7 +5,10 @@ using System.Collections.Generic;
 namespace AutoTensor.Features.Simple
 {
 	public class SbyteProperty : Property<sbyte>
-	{ 
+	{
+		public SbyteProperty() : base() { }
+		public SbyteProperty(string name) : base(name) { }
+
         public override sbyte ToSource(IEnumerable<float> values) 
 			=> (sbyte)values.First();
 
@@ -16,7 +19,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class ByteProperty : Property<byte>
-	{ 
+	{
+		public ByteProperty() : base() { }
+		public ByteProperty(string name) : base(name) { }
+
         public override byte ToSource(IEnumerable<float> values) 
 			=> (byte)values.First();
 
@@ -27,7 +33,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class ShortProperty : Property<short>
-	{ 
+	{
+		public ShortProperty() : base() { }
+		public ShortProperty(string name) : base(name) { }
+
         public override short ToSource(IEnumerable<float> values) 
 			=> (short)values.First();
 
@@ -38,7 +47,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class UshortProperty : Property<ushort>
-	{ 
+	{
+		public UshortProperty() : base() { }
+		public UshortProperty(string name) : base(name) { }
+
         public override ushort ToSource(IEnumerable<float> values) 
 			=> (ushort)values.First();
 
@@ -49,7 +61,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class IntProperty : Property<int>
-	{ 
+	{
+		public IntProperty() : base() { }
+		public IntProperty(string name) : base(name) { }
+
         public override int ToSource(IEnumerable<float> values) 
 			=> (int)values.First();
 
@@ -60,7 +75,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class UintProperty : Property<uint>
-	{ 
+	{
+		public UintProperty() : base() { }
+		public UintProperty(string name) : base(name) { }
+
         public override uint ToSource(IEnumerable<float> values) 
 			=> (uint)values.First();
 
@@ -71,7 +89,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class LongProperty : Property<long>
-	{ 
+	{
+		public LongProperty() : base() { }
+		public LongProperty(string name) : base(name) { }
+
         public override long ToSource(IEnumerable<float> values) 
 			=> (long)values.First();
 
@@ -82,7 +103,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class CharProperty : Property<char>
-	{ 
+	{
+		public CharProperty() : base() { }
+		public CharProperty(string name) : base(name) { }
+
         public override char ToSource(IEnumerable<float> values) 
 			=> (char)values.First();
 
@@ -93,7 +117,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class FloatProperty : Property<float>
-	{ 
+	{
+		public FloatProperty() : base() { }
+		public FloatProperty(string name) : base(name) { }
+
         public override float ToSource(IEnumerable<float> values) 
 			=> (float)values.First();
 
@@ -104,7 +131,10 @@ namespace AutoTensor.Features.Simple
 	}
 
 	public class UlongProperty : Property<ulong>
-	{ 
+	{
+		public UlongProperty() : base() { }
+		public UlongProperty(string name) : base(name) { }
+
         public override ulong ToSource(IEnumerable<float> values) 
 			=> (ulong)values.First();
 
