@@ -6,10 +6,39 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using AutoTensor.Features.Complex;
+using AutoTensor.Tests.Data;
 
 namespace AutoTensor.Tests
 {
-    public class TypeHelperTests
+    public class FakeProperty1 : Property<Fake>
+    {
+        public override Fake ToSource(IEnumerable<float> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<float> ToValue(Fake source)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class FakeProperty2 : Property<Fake>
+    {
+        public override Fake ToSource(IEnumerable<float> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<float> ToValue(Fake source)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class Nonsense { }
+
+    public class JectTests
     {
         [Fact]
         public void Simple_FindProperty_Tests()
@@ -31,9 +60,23 @@ namespace AutoTensor.Tests
             
             foreach (var type in mappings)
             {
-                var property = FindProperty(type.Key);
-                Assert.Equal(type.Value, property.GetType());
+                var property = FindPropertyConverterType(type.Key);
+                Assert.Equal(type.Value, property);
             }
+        }
+
+        [Fact]
+        public void Found_No_Many_Mappings_Test()
+        {
+            Exception ex = Assert.Throws<InvalidOperationException>(
+                () => FindPropertyConverterType(typeof(Nonsense)));
+        }
+
+        [Fact]
+        public void Found_Too_Many_Mappings_Test()
+        {
+            Exception ex = Assert.Throws<InvalidOperationException>(
+                () => FindPropertyConverterType(typeof(Fake)));
         }
     }
 }

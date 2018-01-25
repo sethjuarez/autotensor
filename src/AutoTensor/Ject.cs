@@ -63,10 +63,10 @@ namespace AutoTensor
                     return types[0];
                 }
                 else if (types.Length == 0)
-                    throw new InvalidCastException(
+                    throw new InvalidOperationException(
                         $"Cannot find appropriate feature Property for {nameof(sourceType)}");
                 else
-                    throw new InvalidCastException(
+                    throw new InvalidOperationException(
                         $"Found too many feature Property implementations for {nameof(sourceType)}: {string.Join(", ", types.Select(t => t.Name).ToArray())}");
             }
         }
