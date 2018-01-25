@@ -5,6 +5,12 @@ namespace AutoTensor.Features
 {
     public abstract class Property<S> : IProperty, IConverter<S, float>
     {
+        public Property() { }
+        public Property(string name)
+        {
+            Name = name;
+        }
+
         public string Name { get; set; }
 
         public Type Type => typeof(S);

@@ -28,7 +28,7 @@ namespace AutoTensor
                 var f = pi.GetCustomAttributes(typeof(FeatureAttribute), false);
 
                 // has a feature attribute
-                if (f.Count() == 1)
+                if (f.Count() == 1)   
                 {
                     var feature = f.First() as FeatureAttribute;
                     var property = FindProperty(pi);
@@ -71,51 +71,111 @@ namespace AutoTensor
         }
 
         private static bool IsFeature(FeatureAttribute attr) =>
-            attr.GetType() == typeof(FeatureAttribute) ||
-            attr.GetType().IsSubclassOf(typeof(FeatureAttribute));
+            (attr.GetType() == typeof(FeatureAttribute) ||
+            attr.GetType().IsSubclassOf(typeof(FeatureAttribute)))
+            && attr.GetType() != typeof(LabelAttribute);
 
         private static bool IsLabel(FeatureAttribute attr) =>
             attr.GetType() == typeof(LabelAttribute);
     }
+
+    //public class DescriptorProperty
 
 
     public partial class Descriptor<T>
     {
         public Descriptor<T> With<S>(string name)
         {
-            return With(typeof(S), name);
+            return AddPropertyFor(typeof(S), name);
+        }
+
+        public Descriptor<T> With<S, K>(string name)
+            where K : Property<S>
+        {
+            return AddProperty(CreateProperty(name, typeof(K)));
+        }
+
+        public Descriptor<T> With<S>(Expression<Func<T, S>> p)
+        {
+            var pi = GetPropertyInfo(p);
+            return AddPropertyFor(pi.PropertyType, pi.Name);
+        }
+
+        public Descriptor<T> With<S, K>(Expression<Func<T, S>> p)
+            where K : Property<S>
+        {
+            var pi = GetPropertyInfo(p);
+            return AddProperty(CreateProperty(pi.Name, typeof(K)));
+        }
+
+        public Descriptor<T> With<S>(Property<S> property)
+        {
+            if (!IsValidProperty(property))
+                throw new InvalidOperationException($"Invalid property name for {nameof(property)}");
+            return AddProperty(property);
+        }
+
+        public Descriptor<T> With<S>(Expression<Func<T, S>> p, Property<S> property)
+        {
+            var pi = GetPropertyInfo(p);
+            property.Name = pi.Name;
+            return AddProperty(property);
         }
 
         public Descriptor<T> Learn<S>(string name)
         {
-            return Learn(typeof(S), name);
+            return AddPropertyFor(typeof(S), name, true);
         }
 
-        public Descriptor<T> With<S>(Expression<Func<T, S>> property)
+        public Descriptor<T> Learn<S, K>(string name)
+            where K : Property<S>
         {
-            var pi = GetPropertyInfo(property);
-            return With(pi.PropertyType, pi.Name);
+            return AddProperty(CreateProperty(name, typeof(K)), true);
         }
 
-        public Descriptor<T> Learn<S>(Expression<Func<T, S>> property)
+        public Descriptor<T> Learn<S>(Property<S> property)
         {
-            var pi = GetPropertyInfo(property);
-            return Learn(pi.PropertyType, pi.Name);
-        }
-
-
-        public Descriptor<T> With(Type type, string name)
-        {
-            var property = FindProperty(type);
-            property.Name = name;
-            return AddProperty(property);
-        }
-
-        public Descriptor<T> Learn(Type type, string name)
-        {
-            var property = FindProperty(type);
-            property.Name = name;
+            if (!IsValidProperty(property))
+                throw new InvalidOperationException($"Invalid property name for {nameof(property)}");
             return AddProperty(property, true);
+        }
+
+        public Descriptor<T> Learn<S>(Expression<Func<T, S>> p)
+        {
+            var pi = GetPropertyInfo(p);
+            return AddPropertyFor(pi.PropertyType, pi.Name, true);
+        }
+
+        public Descriptor<T> Learn<S, K>(Expression<Func<T, S>> p)
+            where K : Property<S>
+        {
+            var pi = GetPropertyInfo(p);
+            return AddProperty(CreateProperty(pi.Name, typeof(K)), true);
+        }
+
+        public Descriptor<T> Learn<S>(Expression<Func<T, S>> p, Property<S> property)
+        {
+            var pi = GetPropertyInfo(p);
+            property.Name = pi.Name;
+            return AddProperty(property, true);
+        }
+
+        private bool IsValidProperty(IProperty property) => 
+            !string.IsNullOrEmpty(property.Name) &&
+            !string.IsNullOrWhiteSpace(property.Name);
+
+        private IProperty CreateProperty(string name, Type converter)
+        {
+            var p = Activator.CreateInstance(converter) as IProperty;
+            p.Name = name;
+            return p;
+        }
+
+        private Descriptor<T> AddPropertyFor(Type type, string name, bool asLabel = false)
+        {
+            var property = FindProperty(type);
+            property.Name = name;
+            return AddProperty(property, asLabel);
         }
 
         private Descriptor<T> AddProperty(IProperty property, bool asLabel = false)

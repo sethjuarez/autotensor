@@ -18,8 +18,5 @@ namespace AutoTensor
         public string Name { get; set; }
         public IProperty[] Features { get; set; }
         public IProperty[] Labels { get; set; }
-
     }
-
-
 }
