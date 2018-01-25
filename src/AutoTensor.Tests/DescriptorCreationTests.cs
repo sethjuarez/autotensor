@@ -11,7 +11,7 @@ using AutoTensor.Features.Complex;
 namespace AutoTensor.Tests
 {
     
-    public class DescriptorTests
+    public class DescriptorCreationTests
     {
         private bool HasProperty(IProperty[] list, string name, Type propertyType)
         {
