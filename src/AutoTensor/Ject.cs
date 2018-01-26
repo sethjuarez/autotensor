@@ -16,13 +16,7 @@ namespace AutoTensor
 		/// <returns>The property information.</returns>
 		public static PropertyInfo GetPropertyInfo<T, S>(Expression<Func<T, S>> property)
         {
-            PropertyInfo propertyInfo = null;
-            if (property.Body is MemberExpression)
-                propertyInfo = (property.Body as MemberExpression).Member as PropertyInfo;
-            else
-                propertyInfo = (((UnaryExpression)property.Body).Operand as MemberExpression).Member as PropertyInfo;
-
-            return propertyInfo;
+            return (property.Body as MemberExpression).Member as PropertyInfo;
         }
 
         public static IProperty FindProperty(PropertyInfo pi)

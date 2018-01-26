@@ -266,6 +266,34 @@ namespace AutoTensor.Tests
         }
 
         [Fact]
+        public void With_And_Learn_Creation_Tests()
+        {
+            var d = new Descriptor<Fake>()
+                        .With<long>("A")
+                        .With<short, ShortProperty>("B")
+                        .With(f => f.C)
+                        .Learn(f => f.D, new DateTimeProperty { Features = DateTimeFeature.Day })
+                        .Learn<long, LongProperty>(f => f.E)
+                        .Learn(new ShortProperty("F"));
+
+            Assert.Equal("A", d.Features[0].Name);
+            Assert.Equal("B", d.Features[1].Name);
+            Assert.Equal("C", d.Features[2].Name);
+            Assert.Equal("D", d.Labels[0].Name);
+            Assert.Equal("E", d.Labels[1].Name);
+            Assert.Equal("F", d.Labels[2].Name);
+
+            Assert.Equal(typeof(LongProperty), d.Features[0].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Features[1].GetType());
+            Assert.Equal(typeof(CharProperty), d.Features[2].GetType());
+            Assert.Equal(typeof(DateTimeProperty), d.Labels[0].GetType());
+            Assert.Equal(typeof(LongProperty), d.Labels[1].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Labels[2].GetType());
+
+            Assert.Equal(DateTimeFeature.Day, ((DateTimeProperty)d.Labels[0]).Features);
+        }
+
+        [Fact]
         public void Invalid_Property_Creation_Tests()
         {
             Exception ex1 = Assert.Throws<InvalidOperationException>(
