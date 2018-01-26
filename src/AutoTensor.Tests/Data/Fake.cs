@@ -138,13 +138,13 @@ namespace AutoTensor.Tests.Data
         public short B { get; set; }
 
         public char C { get; set; }
+        
+        public DateTime D { get; set; }
 
-        public static IEnumerable<Fake> GetObjects()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                yield return new Fake { A = 1, B = 1, C = 'A' };
-            }
-        }
+        public long E { get; set; }
+
+        public short F { get; set; }
+
+        public char G { get; set; }
     }
 }

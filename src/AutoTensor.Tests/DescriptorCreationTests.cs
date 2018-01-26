@@ -109,6 +109,7 @@ namespace AutoTensor.Tests
             foreach (var item in labels)
                 Assert.True(HasProperty(d.Labels, item.Key, item.Value));
 
+            Assert.Equal("StronglyDeclared", d.Name);
         }
 
         [Fact]
@@ -206,6 +207,72 @@ namespace AutoTensor.Tests
         {
             Exception ex = Assert.Throws<InvalidOperationException>(
                 () => Descriptor.Create<StrongDateTimeCustomTripleException>());
+        }
+
+        [Fact]
+        public void With_Creation_Tests()
+        {
+            var d = new Descriptor<Fake>()
+                        .With<long>("A")
+                        .With<short, ShortProperty>("B")
+                        .With(f => f.C)
+                        .With(f => f.D, new DateTimeProperty { Features = DateTimeFeature.Day })
+                        .With<long, LongProperty>(f => f.E)
+                        .With(new ShortProperty("F"));
+            
+            Assert.Equal("A", d.Features[0].Name);
+            Assert.Equal("B", d.Features[1].Name);
+            Assert.Equal("C", d.Features[2].Name);
+            Assert.Equal("D", d.Features[3].Name);
+            Assert.Equal("E", d.Features[4].Name);
+            Assert.Equal("F", d.Features[5].Name);
+
+            Assert.Equal(typeof(LongProperty), d.Features[0].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Features[1].GetType());
+            Assert.Equal(typeof(CharProperty), d.Features[2].GetType());
+            Assert.Equal(typeof(DateTimeProperty), d.Features[3].GetType());
+            Assert.Equal(typeof(LongProperty) , d.Features[4].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Features[5].GetType());
+
+            Assert.Equal(DateTimeFeature.Day, ((DateTimeProperty)d.Features[3]).Features);
+        }
+
+        [Fact]
+        public void Learn_Creation_Tests()
+        {
+            var d = new Descriptor<Fake>()
+                        .Learn<long>("A")
+                        .Learn<short, ShortProperty>("B")
+                        .Learn(f => f.C)
+                        .Learn(f => f.D, new DateTimeProperty { Features = DateTimeFeature.Day })
+                        .Learn<long, LongProperty>(f => f.E)
+                        .Learn(new ShortProperty("F"));
+
+            Assert.Equal("A", d.Labels[0].Name);
+            Assert.Equal("B", d.Labels[1].Name);
+            Assert.Equal("C", d.Labels[2].Name);
+            Assert.Equal("D", d.Labels[3].Name);
+            Assert.Equal("E", d.Labels[4].Name);
+            Assert.Equal("F", d.Labels[5].Name);
+
+            Assert.Equal(typeof(LongProperty), d.Labels[0].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Labels[1].GetType());
+            Assert.Equal(typeof(CharProperty), d.Labels[2].GetType());
+            Assert.Equal(typeof(DateTimeProperty), d.Labels[3].GetType());
+            Assert.Equal(typeof(LongProperty), d.Labels[4].GetType());
+            Assert.Equal(typeof(ShortProperty), d.Labels[5].GetType());
+
+            Assert.Equal(DateTimeFeature.Day, ((DateTimeProperty)d.Labels[3]).Features);
+        }
+
+        [Fact]
+        public void Invalid_Property_Creation_Tests()
+        {
+            Exception ex1 = Assert.Throws<InvalidOperationException>(
+                () => Descriptor.For<Fake>().With(new ShortProperty()));
+
+            Exception ex2 = Assert.Throws<InvalidOperationException>(
+                () => Descriptor.For<Fake>().Learn(new ShortProperty()));
         }
     }
 }

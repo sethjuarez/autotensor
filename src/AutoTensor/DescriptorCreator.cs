@@ -27,8 +27,10 @@ namespace AutoTensor
             {
                 var f = pi.GetCustomAttributes(typeof(FeatureAttribute), false);
 
+                // no attribute? move on!
+                if (f.Count() == 0) continue;
                 // has a feature attribute
-                if (f.Count() == 1)   
+                else if (f.Count() == 1)
                 {
                     var feature = f.First() as FeatureAttribute;
                     var property = FindProperty(pi);
@@ -47,7 +49,7 @@ namespace AutoTensor
                     var f2 = f.ElementAt(1) as FeatureAttribute;
 
                     // both are feature attributes (no, no)
-                    if(IsFeature(f1) && IsFeature(f2))
+                    if (IsFeature(f1) && IsFeature(f2))
                         throw new InvalidOperationException($"{t.Name}.{pi.Name} has too many feature attributes.");
 
                     var feature = f1.GetType() == typeof(LabelAttribute) ? f2 : f1;
@@ -78,10 +80,7 @@ namespace AutoTensor
         private static bool IsLabel(FeatureAttribute attr) =>
             attr.GetType() == typeof(LabelAttribute);
     }
-
-    //public class DescriptorProperty
-
-
+    
     public partial class Descriptor<T>
     {
         public Descriptor<T> With<S>(string name)
