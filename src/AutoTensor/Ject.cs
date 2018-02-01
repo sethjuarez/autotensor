@@ -46,9 +46,8 @@ namespace AutoTensor
             else
             {
                 // find
-                var types = FindType(
-                                t => t.BaseType == typeof(Property<>)
-                                      .MakeGenericType(sourceType));
+                var types = FindType(t => t.BaseType == typeof(Property<>)
+                                           .MakeGenericType(sourceType));
 
                 // if only one then cache and return
                 if (types.Length == 1)
@@ -68,10 +67,9 @@ namespace AutoTensor
         internal static Type[] FindType(Func<Type, bool> predicate)
         {
             var type = AppDomain.CurrentDomain.GetAssemblies()
-                             .SelectMany(a => a.GetTypes())
-                             .Where(predicate)
-                             .ToArray();
-
+                                .SelectMany(a => a.GetTypes())
+                                .Where(predicate)
+                                .ToArray();
             return type;
         }
     }

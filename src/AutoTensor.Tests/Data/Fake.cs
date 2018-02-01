@@ -146,5 +146,11 @@ namespace AutoTensor.Tests.Data
         public short F { get; set; }
 
         public char G { get; set; }
+        
+    }
+
+    public class TinyFake
+    {
+
     }
 }

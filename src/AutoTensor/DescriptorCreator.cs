@@ -10,11 +10,23 @@ namespace AutoTensor
 {
     public class Descriptor
     {
-        public static Descriptor<object> Create(string name = "")
+        /// <summary>
+        /// Creates a weak descriptor for an unknown type.
+        /// </summary>
+        /// <param name="name">Name of the type</param>
+        /// <returns>Descriptor</returns>
+        public static Descriptor<object> For(string name = "")
         {
             return new Descriptor<object>() { Name = name };
         }
 
+        /// <summary>
+        /// Create a descriptor for a strongly typed class.
+        /// This will create a descriptor by inspecting the
+        /// attributes of the type.
+        /// </summary>
+        /// <typeparam name="T">Object Type</typeparam>
+        /// <returns>Descriptor</returns>
         public static Descriptor<T> Create<T>()
         {
             var d = For<T>();
@@ -67,6 +79,12 @@ namespace AutoTensor
             return d;
         }
 
+        /// <summary>
+        /// Create an empty descriptor (without labels or
+        /// properties) for a provided type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>Descriptor</returns>
         public static Descriptor<T> For<T>()
         {
             return new Descriptor<T>() { Name = typeof(T).Name };

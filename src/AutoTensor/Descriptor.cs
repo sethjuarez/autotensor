@@ -18,5 +18,20 @@ namespace AutoTensor
         public string Name { get; set; }
         public IProperty[] Features { get; set; }
         public IProperty[] Labels { get; set; }
+
+        private IEnumerable<float> Convert(T item, IProperty[] properties)
+        {
+            foreach (var property in properties)
+            {
+
+            }
+
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<IEnumerable<float>> Convert(IEnumerable<T> items, IProperty[] properties)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

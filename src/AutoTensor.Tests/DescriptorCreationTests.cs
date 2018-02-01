@@ -23,7 +23,7 @@ namespace AutoTensor.Tests
         [Fact]
         public void Weak_Descriptor_Features_Creation_Test()
         {
-            var d = Descriptor.Create("General")
+            var d = Descriptor.For("General")
                                 .With<long>("A")
                                 .With<short>("B")
                                 .With<char>("C");
