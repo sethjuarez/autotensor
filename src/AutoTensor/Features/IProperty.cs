@@ -7,8 +7,6 @@ namespace AutoTensor.Features
     /// Basic property that will be used to convert
     /// a type to a section of a tensor object
     /// </summary>
-    /// <typeparam name="S">Source type</typeparam>
-    /// <typeparam name="T">Target type</typeparam>
     public interface IProperty
     {
         /// <summary>
@@ -35,9 +33,9 @@ namespace AutoTensor.Features
         /// An enumerator that allows foreach to be used to process the columns in this collection.
         /// </returns>
         IEnumerable<string> GetColumns();
-
     }
-    public interface IConverter<S, T>
+
+    public interface IConverter<in S, out T>
     { 
         /// <summary>
         /// Used as a preprocessing step when overridden. Can be used to look at the entire data set as a
@@ -69,11 +67,5 @@ namespace AutoTensor.Features
         /// <param name="source"></param>
         /// <returns></returns>
         IEnumerable<T> ToValue(S source);
-        /// <summary>
-        /// Convert list of float values to source object
-        /// </summary>
-        /// <param name="values">float values</param>
-        /// <returns>source object</returns>
-        S ToSource(IEnumerable<T> values);
     }
 }

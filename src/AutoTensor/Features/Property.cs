@@ -15,7 +15,7 @@ namespace AutoTensor.Features
 
         public Type Type => typeof(S);
 
-        public int Position { get; set; }
+        public int Position { get; set; } = -1;
 
         public virtual int Length => 1;
 
@@ -23,6 +23,7 @@ namespace AutoTensor.Features
         {
             yield return Name;
         }
+        
 
         public virtual void PostProcess(IEnumerable<S> items) { }
 
@@ -35,5 +36,22 @@ namespace AutoTensor.Features
         public abstract S ToSource(IEnumerable<float> values);
 
         public abstract IEnumerable<float> ToValue(S source);
+
+
+        //----- garbage
+        public IConverter<K, T> GetConverter<K, T>()
+        {
+            return this as IConverter<K, T>;
+        }
+
+        public IEnumerable<T> ToValue<T>(object source)
+        {
+            if (typeof(T) != typeof(float))
+                throw new InvalidOperationException();
+            if(source.GetType() != typeof(S))
+                throw new InvalidOperationException();
+
+            return (IEnumerable<T>)ToValue((S)source);
+        }
     }
 }

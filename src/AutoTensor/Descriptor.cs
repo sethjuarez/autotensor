@@ -19,19 +19,25 @@ namespace AutoTensor
         public IProperty[] Features { get; set; }
         public IProperty[] Labels { get; set; }
 
-        private IEnumerable<float> Convert(T item, IProperty[] properties)
+        public IEnumerable<float> Convert(T item)
         {
-            foreach (var property in properties)
+            for(int i = 0; i < Features.Length; i++)
             {
+                var feature = (Property<object>)Features[i];
 
+
+
+                if (feature.Position < 0)
+                    feature.Position = i == 0 ? 0 : Features[i - 1].Position + Features[i - 1].Length;
             }
 
             throw new NotImplementedException();
         }
 
-        private IEnumerable<IEnumerable<float>> Convert(IEnumerable<T> items, IProperty[] properties)
+        public IEnumerable<IEnumerable<float>> Convert(IEnumerable<T> items)
         {
-            throw new NotImplementedException();
+            foreach (var item in items)
+                yield return Convert(item);
         }
     }
 }

@@ -23,7 +23,8 @@ namespace AutoTensor.Tests.Simple
 		"long",
 		"char",
 		"float",
-		"ulong" };
+		"ulong",
+		"double" };
 
 	foreach(var item in simpleTypes)
 	{

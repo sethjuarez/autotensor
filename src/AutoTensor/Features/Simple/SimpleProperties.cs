@@ -144,5 +144,19 @@ namespace AutoTensor.Features.Simple
         }
 	}
 
+	public class DoubleProperty : Property<double>
+	{
+		public DoubleProperty() : base() { }
+		public DoubleProperty(string name) : base(name) { }
+
+        public override double ToSource(IEnumerable<float> values) 
+			=> (double)values.First();
+
+        public override IEnumerable<float> ToValue(double source)
+        {
+            yield return (float)source;
+        }
+	}
+
 }
   

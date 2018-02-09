@@ -786,5 +786,83 @@ namespace AutoTensor.Tests.Simple
         }
     }
 
+	public class DoublePropertyTests 
+	{ 
+        [Fact]
+        public void Convert_To_Target_Test()
+        {
+            var property = new DoubleProperty();
+            for(int i = 0; i < 128; i++)
+            {
+                var o = property.ToValue((double)i);
+                Assert.Equal(1, o.Count());
+                Assert.Equal((float)i, o.First());
+            }
+        }
+
+        [Fact]
+        public void Convert_To_Source_Test()
+        {
+            var property = new DoubleProperty();
+            for (int i = 0; i < 255; i++)
+            {
+                IEnumerable<float> val = new[] { (float)i };
+                var o = property.ToSource(val);
+                Assert.Equal((double)i, o);
+            }
+        }
+
+        [Fact]
+        public void Length_Test()
+        {
+            var property = new DoubleProperty();
+            Assert.Equal(1, property.Length);
+        }
+
+        [Fact] 
+        public void Name_Test()
+        {
+            string name = "name";
+            var property = new DoubleProperty(name);
+            var cols = property.GetColumns();
+            Assert.Equal(1, cols.Count());
+            Assert.Equal(name, cols.First());
+        }
+
+        [Fact]
+        public void Position_Test()
+        {
+            int pos = 1;
+            var property = new DoubleProperty() { Position = pos };
+            Assert.Equal(pos, property.Position);
+        }
+
+        [Fact]
+        public void Type_Test()
+        {
+            Type type = typeof(double);
+            var property = new DoubleProperty();
+            Assert.Equal(type, property.Type);
+        }
+
+        [Fact]
+        public void Process_Test()
+        {
+            var property = new DoubleProperty();
+            IEnumerable<double> values = new double[] 
+			{ 
+				(double)1, 
+				(double)2, 
+				(double)3, 
+				(double)4 
+			};
+            property.PreProcess(values);
+            property.PreProcess(values.First());
+
+            property.PostProcess(values.First());
+            property.PostProcess(values);
+        }
+    }
+
 }
   
